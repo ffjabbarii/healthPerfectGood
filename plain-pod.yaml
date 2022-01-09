@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hc-webapp
+spec:
+  containers:
+  - name: hc-webapp
+    image: kodacme/hc-webapp:1.0
+    livenessProbe:
+      httpGet:
+        path: /health
+        port: 5001
+      initialDelaySeconds: 10
+      periodSeconds: 4
+    readinessProbe:
+      httpGet:
+        path: /ready
+        port: 5001
+      initialDelaySeconds: 12
+      periodSeconds: 6
